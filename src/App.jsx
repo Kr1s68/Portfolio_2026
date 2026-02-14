@@ -36,28 +36,36 @@ function getFileContent(fileId) {
 }
 
 const panelAnimation = {
-  initial: { x: 40, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: 40, opacity: 0 },
-  transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+  initial: { x: 60, opacity: 0 },
+  animate: { x: 0, opacity: 1, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeOut' } },
 }
 
 export default function App() {
   const [bootComplete, setBootComplete] = useState(false)
   const [activeFile, setActiveFile] = useState(null)
+  const [isSplit, setIsSplit] = useState(false)
 
   const handleBootComplete = useCallback(() => {
     setBootComplete(true)
   }, [])
 
   const handleFileSelect = useCallback((id) => {
-    setActiveFile(prev => prev === id ? null : id)
+    setActiveFile(prev => {
+      const next = prev === id ? null : id
+      if (next) setIsSplit(true)
+      return next
+    })
   }, [])
+
+  const handleExitComplete = useCallback(() => {
+    if (!activeFile) setIsSplit(false)
+  }, [activeFile])
 
   const fileContent = activeFile ? getFileContent(activeFile) : null
 
   return (
-    <div className="layout">
+    <div className={`layout ${isSplit ? 'layout--split' : 'layout--centered'}`}>
       <div className="layout__sidebar">
         <div className="terminal">
           <TerminalHeader />
@@ -85,7 +93,7 @@ export default function App() {
       </div>
 
       <div className="layout__panel">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
           {fileContent && (
             <motion.div
               key={activeFile}
@@ -132,18 +140,30 @@ function WorkContent({ job }) {
 
 function ProjectContent({ project }) {
   return (
-    <div className="file-content">
-      <h2 className="file-content__title">{project.name}</h2>
-      <div className="file-content__tags">
-        {project.tags.map(tag => (
-          <span key={tag} className="file-content__tag">[{tag}]</span>
+    <div className="file-content file-content--split">
+      <div className="file-content__left">
+        <h2 className="file-content__title">{project.name}</h2>
+        <div className="file-content__tags">
+          {project.tags.map(tag => (
+            <span key={tag} className="file-content__tag">[{tag}]</span>
+          ))}
+        </div>
+        <p className="file-content__text">{project.description}</p>
+        {project.sections?.map((section, i) => (
+          <div key={i}>
+            <h3 className="file-content__section-heading">{section.heading}</h3>
+            <p className="file-content__text">{section.text}</p>
+          </div>
         ))}
       </div>
-      <p className="file-content__text">{project.description}</p>
-      {project.url && (
-        <a href={project.url} target="_blank" rel="noopener noreferrer" className="file-content__link">
-          → Visit Website
-        </a>
+      {project.image && (
+        <div className="file-content__right">
+          <img
+            src={project.image}
+            alt={project.name}
+            className="file-content__image"
+          />
+        </div>
       )}
     </div>
   )
