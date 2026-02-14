@@ -1,0 +1,103 @@
+.contact-section {
+  padding: var(--space-2) 0;
+}
+
+.contact-section__info {
+  padding: var(--space-1) 0;
+  font-size: var(--font-size-sm);
+}
+
+.contact-section__label {
+  color: var(--color-text-muted);
+  margin-right: var(--space-2);
+}
+
+.contact-section__email,
+.contact-section__link {
+  color: var(--color-accent-primary);
+  font-weight: 500;
+}
+
+.contact-section__form {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-section__field {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.contact-section__prompt {
+  color: var(--color-accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  padding-top: var(--space-1);
+  min-width: 8ch;
+}
+
+.contact-section__input,
+.contact-section__textarea {
+  flex: 1;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  transition: border-color var(--duration-fast) var(--ease-terminal);
+}
+
+.contact-section__input:focus,
+.contact-section__textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+}
+
+.contact-section__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.contact-section__submit {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-accent-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border: 1px solid var(--color-accent-primary);
+  border-radius: 2px;
+  background: transparent;
+  transition: background-color var(--duration-fast) var(--ease-terminal),
+              color var(--duration-fast) var(--ease-terminal);
+}
+
+.contact-section__submit:hover:not(:disabled) {
+  background-color: var(--color-accent-primary);
+  color: var(--color-bg);
+}
+
+.contact-section__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-section__status {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: var(--space-1) 0;
+}
+
+.contact-section__status--ok {
+  color: var(--color-accent-ok);
+}
+
+.contact-section__status--err {
+  color: var(--color-accent-error);
+}

@@ -1,0 +1,63 @@
+.recs-section {
+  padding: var(--space-2) 0;
+}
+
+.recs-section__rec {
+  position: relative;
+}
+
+.recs-section__label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-1) 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-terminal);
+}
+
+.recs-section__label:hover {
+  transform: translateX(4px);
+}
+
+.recs-section__prefix {
+  color: var(--color-text-muted);
+  white-space: pre;
+  user-select: none;
+}
+
+.recs-section__filename {
+  color: var(--color-text-primary);
+  transition: color var(--duration-fast) var(--ease-terminal);
+}
+
+.recs-section__label:hover .recs-section__filename,
+.recs-section__label--open .recs-section__filename {
+  color: var(--color-accent-primary);
+}
+
+.recs-section__content {
+  overflow: hidden;
+}
+
+.recs-section__content-inner {
+  padding: var(--space-3) 0 var(--space-3) var(--tree-indent);
+  border-left: 1px solid var(--tree-line-color);
+  margin-left: 0.6ch;
+}
+
+.recs-section__quote {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: var(--space-2);
+}
+
+.recs-section__author {
+  color: var(--color-accent-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}

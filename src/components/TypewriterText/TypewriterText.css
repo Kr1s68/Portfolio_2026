@@ -1,0 +1,16 @@
+.typewriter {
+  font-family: var(--font-mono);
+}
+
+.typewriter__text {
+  color: var(--color-text-primary);
+}
+
+.typewriter__cursor {
+  color: var(--color-accent-primary);
+  font-weight: 600;
+}
+
+.typewriter__cursor--blink {
+  animation: blink 1s step-end infinite;
+}

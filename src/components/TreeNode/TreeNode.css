@@ -1,0 +1,40 @@
+.tree-node {
+  position: relative;
+}
+
+.tree-node__label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-1) 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-terminal),
+              color var(--duration-fast) var(--ease-terminal);
+}
+
+.tree-node__label:hover {
+  transform: translateX(4px);
+}
+
+.tree-node__label:hover .tree-node__name {
+  color: var(--color-accent-primary);
+}
+
+.tree-node__label--active .tree-node__name {
+  color: var(--color-accent-primary);
+}
+
+.tree-node__prefix {
+  color: var(--color-text-muted);
+  white-space: pre;
+  user-select: none;
+}
+
+.tree-node__name {
+  color: var(--color-accent-secondary);
+  font-weight: 500;
+  transition: color var(--duration-fast) var(--ease-terminal);
+}
