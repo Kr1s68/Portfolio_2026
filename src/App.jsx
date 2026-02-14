@@ -12,7 +12,7 @@ import ContactForm from './sections/ContactSection/ContactForm'
 import Socials from './sections/ContactSection/Socials'
 import './App.css'
 
-function getFileContent(fileId) {
+function getFileContent(fileId, onFileSelect) {
   const job = workExperience.find(j => j.id === fileId)
   if (job) return { title: `~/work/${job.company.toLowerCase().replace(/\s+/g, '-')}.log`, content: <WorkContent job={job} /> }
 
@@ -26,7 +26,7 @@ function getFileContent(fileId) {
   if (rec) return { title: `~/recommendations/${rec.author.toLowerCase().replace(/\s+/g, '-')}.txt`, content: <RecContent rec={rec} /> }
 
   if (fileId === 'bio') return { title: '~/about/bio.txt', content: <BioContent /> }
-  if (fileId === 'skills') return { title: '~/about/skills.log', content: <SkillsContent /> }
+  if (fileId === 'skills') return { title: '~/about/skills.log', content: <SkillsContent onFileSelect={onFileSelect} /> }
   if (fileId === 'interests') return { title: '~/about/interests.txt', content: <InterestsContent /> }
 
   if (fileId === 'contact-form') return { title: '~/contact/send-message.sh', content: <ContactForm /> }
@@ -62,7 +62,7 @@ export default function App() {
     if (!activeFile) setIsSplit(false)
   }, [activeFile])
 
-  const fileContent = activeFile ? getFileContent(activeFile) : null
+  const fileContent = activeFile ? getFileContent(activeFile, handleFileSelect) : null
 
   return (
     <div className={`layout ${isSplit ? 'layout--split' : 'layout--centered'}`}>
@@ -129,11 +129,31 @@ function WorkContent({ job }) {
       <h2 className="file-content__title">{job.role}</h2>
       <div className="file-content__subtitle">{job.company}</div>
       <div className="file-content__meta">{job.period}</div>
+
+      <h3 className="file-content__section-heading">## What I did</h3>
       <ul className="file-content__list">
-        {job.description.map((task, i) => (
-          <li key={i}>→ {task}</li>
+        {job.whatIDid.map((item, i) => (
+          <li key={i}>→ {item}</li>
         ))}
       </ul>
+
+      <h3 className="file-content__section-heading">## What I learned</h3>
+      <ul className="file-content__list">
+        {job.whatILearned.map((item, i) => (
+          <li key={i}>→ {item}</li>
+        ))}
+      </ul>
+
+      <h3 className="file-content__section-heading">## What I'd do</h3>
+      <ul className="file-content__list">
+        {job.whatIdDo.map((item, i) => (
+          <li key={i}>→ {item}</li>
+        ))}
+      </ul>
+
+      <a className="file-content__link" href="/Kristiyan_Boyanov_CV.pdf" download>
+        → Download my CV
+      </a>
     </div>
   )
 }
@@ -149,6 +169,11 @@ function ProjectContent({ project }) {
           ))}
         </div>
         <p className="file-content__text">{project.description}</p>
+        {project.github && (
+          <a className="file-content__link" href={project.github} target="_blank" rel="noopener noreferrer">
+            → View on GitHub
+          </a>
+        )}
         {project.sections?.map((section, i) => (
           <div key={i}>
             <h3 className="file-content__section-heading">{section.heading}</h3>
@@ -156,13 +181,16 @@ function ProjectContent({ project }) {
           </div>
         ))}
       </div>
-      {project.image && (
+      {project.images?.length > 0 && (
         <div className="file-content__right">
-          <img
-            src={project.image}
-            alt={project.name}
-            className="file-content__image"
-          />
+          {project.images.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`${project.name} ${i + 1}`}
+              className="file-content__image"
+            />
+          ))}
         </div>
       )}
     </div>
@@ -173,7 +201,12 @@ function FreelanceContent({ service }) {
   return (
     <div className="file-content">
       <h2 className="file-content__title">{service.title}</h2>
-      <p className="file-content__text">{service.description}</p>
+      {service.sections.map((section, i) => (
+        <div key={i}>
+          <h3 className="file-content__section-heading">{section.heading}</h3>
+          <p className="file-content__text">{section.text}</p>
+        </div>
+      ))}
     </div>
   )
 }
@@ -197,13 +230,32 @@ function BioContent() {
   )
 }
 
-function SkillsContent() {
+function SkillsContent({ onFileSelect }) {
   return (
     <div className="file-content">
       {skills.map((group) => (
-        <div key={group.category} className="file-content__skill-row">
-          <span className="file-content__skill-category">{group.category}:</span>
-          <span className="file-content__skill-items">{group.items.join(', ')}</span>
+        <div key={group.category} className="file-content__skill-group">
+          <h3 className="file-content__section-heading">## {group.category}</h3>
+          <ul className="file-content__skill-list">
+            {group.items.map((skill) => (
+              <li key={skill.name} className="file-content__skill-item">
+                <span className="file-content__skill-name">{skill.name}</span>
+                {skill.projects?.length > 0 && (
+                  <span className="file-content__skill-projects">
+                    {skill.projects.map((proj, i) => (
+                      <button
+                        key={proj.id}
+                        className="file-content__skill-project-link"
+                        onClick={() => onFileSelect(proj.id)}
+                      >
+                        {i > 0 && ' '}[{proj.label}]
+                      </button>
+                    ))}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>

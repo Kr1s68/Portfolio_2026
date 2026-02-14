@@ -4,7 +4,7 @@ export const projects = [
     name: "Aromatica Bulgaria",
     fileName: "aromatica-bulgaria.md",
     tags: ["UX/UI Design", "Development", "Continuous Support"],
-    image: "/aromatica-main-page.png",
+    images: ["/aromatica-main-page.png"],
     description: `I had the opportunity to develop this online store from the ground up, utilizing React and Firebase to meet the client's specific requirements. This project was particularly meaningful to me, as it allowed me to merge my technical expertise with my passion for creative design. Not only did I build the entire e-commerce platform, but I also crafted all the branding elements, ensuring a cohesive and visually appealing identity for the store.`,
     sections: [
       {
@@ -30,7 +30,7 @@ export const projects = [
     name: "Studify AI",
     fileName: "studify-ai.md",
     tags: ["Full Stack Development", "Continuous Support", "Consulting"],
-    image: "/studify-ai-main-page.png",
+    images: ["/studify-ai-main-page.png"],
     description: `Initially brought on as a full stack developer for a specific task, I soon found that my alignment with the product's target demographic positioned me to contribute beyond the original scope. As a result, I took on additional responsibilities as a consultant, providing valuable insights and strategic guidance. Ultimately, I played a key role in the successful launch of the product.`,
     sections: [
       {
@@ -56,7 +56,7 @@ export const projects = [
     name: "Dream Builder",
     fileName: "dream-builder.md",
     tags: ["UX/UI Design", "Development", "Personal Project"],
-    image: "/dream-builder-home-page.png",
+    images: ["/dream-builder-home-page.png"],
     description: `My inaugural venture into software product development and marketing served as a pivotal learning experience, encompassing diverse facets of software engineering, social media outreach, and the intricacies of launching a digital service. This project stands as a testament to my unwavering commitment to professional growth and mastery of my craft.`,
     sections: [
       {
@@ -82,7 +82,7 @@ export const projects = [
     name: "Mind Map App",
     fileName: "mind-map.md",
     tags: ["Java", "Desktop App", "Personal Project"],
-    image: null,
+    images: [],
     description: `A Java-based Mind Map desktop app, designed to help you manage ideas and projects effortlessly. This node-based tool provides a dynamic platform for organizing your thoughts and guiding your ideas towards successful fruition.`,
     sections: [
       {
@@ -100,6 +100,108 @@ export const projects = [
       {
         heading: "Technologies I learned and practices I applied",
         text: `This project was my deep dive into Java beyond the basics. I worked extensively with Java Swing for the GUI, learned about custom painting with Graphics2D for rendering nodes and connections, and implemented event listeners for complex mouse interactions like drag-and-drop and multi-select. On the data side, I used Java's serialization API for saving and loading mind maps. The project also taught me the importance of separating concerns in a desktop application — keeping the data model independent from the view layer — which is a pattern that's served me well in every project since.`,
+      },
+    ],
+  },
+  {
+    id: "video-editor",
+    name: "Browser Video Editor",
+    fileName: "video-editor.md",
+    tags: [
+      "Next.js",
+      "Remotion",
+      "Spring AI",
+      "TypeScript",
+      "AWS Lambda",
+      "Gemini AI",
+      "ElevenLabs",
+      "FFmpeg",
+      "Personal Project",
+    ],
+    images: [
+      "/video_editor.png",
+      "/timeline.png",
+      "/video_controls.png",
+      "/animation_editor.png",
+    ],
+    github: "https://github.com/Kr1s68/video-editor-next",
+    description: `Inspired by my time at Bitmovin, I built an AI-integrated video editor that runs entirely in the browser. It uses Remotion for video composition, FFmpeg on the backend for AI-friendly content processing, and Next.js on the frontend with AWS Lambda for cloud rendering. Gemini 2.5 Flash handles intelligent editing assistance, ElevenLabs powers voice generation, and the whole thing is designed to automate the repetitive parts of editing. I shared the prototype with professional editors and influencers in my circle — they reported significant time savings. One of the projects I'm most proud of.`,
+    sections: [
+      {
+        heading: "Challenges",
+        text: `Building a video editor in the browser is nothing like typical web development. The timeline needed drag-and-drop, frame-accurate trimming, snapping, collision detection, and merge/split — across four parallel tracks. On top of that, the AI layer added real complexity: FFmpeg preprocesses video on the backend so Gemini can interpret it, and the results feed back into the editor seamlessly. ElevenLabs voice generation meant handling async audio and syncing it to the timeline. Keeping all of these systems talking through shared state without breaking was the hardest architectural challenge I've faced.`,
+      },
+      {
+        heading: "Motivation",
+        text: `Working at Bitmovin showed me how video tech works at scale, and it got me thinking — what would a modern, AI-first editor look like if it lived in the browser? Most tools were either bloated or too shallow, and none were using AI in a meaningful way. Remotion treats video as code, which felt like the right foundation. Combining that with AI automation — smart cuts, voice generation, content-aware suggestions — was too interesting not to try. Hearing from real editors that it actually saved them time made it feel like more than just a side project.`,
+      },
+      {
+        heading: "The time it took",
+        text: `Built in phases over several months. The first few weeks were Remotion exploration and timeline architecture. Core editing (tracks, trimming, snapping, playback sync) took about six weeks. Text overlays and the animation node editor added a couple more. The AI layer — FFmpeg preprocessing, Gemini integration, ElevenLabs voice generation — was its own phase. AWS Lambda for cloud rendering came last.`,
+      },
+      {
+        heading: "Technologies I learned and practices I applied",
+        text: `My first serious project with Next.js 15 and React 19. TypeScript throughout — Zod for validation, strict typing, complex generics for timeline state. Remotion taught me frame-based composition and rendering pipelines. FFmpeg for backend media processing. Gemini 2.5 Flash for multimodal AI — feeding it video and getting structured output. ElevenLabs for voice synthesis and audio sync. React Flow for the node-based animation editor. AWS Lambda for serverless rendering — IAM, layers, cold starts. TailwindCSS for styling.`,
+      },
+    ],
+  },
+  {
+    id: "steam-api",
+    name: "Custom Steam Market API",
+    fileName: "steam-api.md",
+    tags: ["TypeScript", "Node.js", "Puppeteer", "Docker", "Personal Project"],
+    images: [],
+    github: "https://github.com/Kr1s68/Custom-Steam-Api",
+    description: `A REST API that scrapes pricing and market data from the Steam Community Market. Built it because Valve doesn't offer an official API and the third-party alternatives were either expensive or unreliable. Supports multi-currency pricing, automatic retries, and deploys to Docker or Vercel.`,
+    sections: [
+      {
+        heading: "Challenges",
+        text: `Steam doesn't want you scraping their marketplace, so the main challenge was reliability. Pages load dynamically, structures change without notice, and requests get rate-limited if you're not careful. Puppeteer handled the browser automation, but keeping a single shared instance alive across requests without memory leaks or crashes took some work. Deploying to Vercel's serverless environment added another layer — Chromium doesn't play nicely with serverless out of the box, so I had to use lightweight Chromium packages and work around the 60-second timeout on the free tier.`,
+      },
+      {
+        heading: "Motivation",
+        text: `I was deep into CS2 skins at the time and wanted real-time market data without paying for a third-party service or manually checking prices. The existing options were either overpriced or unreliable, and Valve's own endpoints were undocumented and inconsistent. So I built my own. It started as a quick script and turned into a proper API with auth, currency conversion, health checks, and Docker support — mostly because once I had it working, I kept finding ways to make it better.`,
+      },
+      {
+        heading: "The time it took",
+        text: `About a week and a half from first commit to a stable, deployable API. The first few days were figuring out Puppeteer and getting reliable scraping working — handling dynamic page loads, retries, and edge cases. The middle stretch was building the Express API layer: routing, API key auth, currency support, and error handling. The last couple of days were deployment — Dockerising everything with proper resource limits and health checks, then getting it running on Vercel with the serverless Chromium workaround.`,
+      },
+      {
+        heading: "Technologies I learned and practices I applied",
+        text: `Puppeteer for headless browser automation and web scraping. TypeScript for strict typing across the API. Express.js for the REST layer. Docker and Docker Compose for containerised deployment with resource management. Vercel's serverless platform with lightweight Chromium for cloud deployment. Learned a lot about browser instance management, request retry patterns, and the trade-offs between containerised vs serverless hosting.`,
+      },
+    ],
+  },
+  {
+    id: "pl4yer",
+    name: "PL4YER",
+    fileName: "pl4yer.md",
+    tags: [
+      "Electron",
+      "Node.js",
+      "JavaScript",
+      "Desktop App",
+      "Personal Project",
+    ],
+    images: ["/pl4yer-ui.png", "/pl4yer-app-flow.png"],
+    github: "https://github.com/Kr1s68/PL4YER-2",
+    description: `A minimalist desktop audio player with a retro console-based interface. Built with Electron and vanilla JavaScript, it combines a command-line aesthetic with modern playback features — playlists, YouTube downloading via yt-dlp, format support across MP3, WAV, OGG, FLAC, and M4A, and a fully local-first architecture with zero telemetry.`,
+    sections: [
+      {
+        heading: "Challenges",
+        text: `The main challenge was making a CLI-style interface feel natural for something as interactive as a music player. Playback controls, seek, playlist management, and file browsing all had to work through typed commands without feeling clunky. Building a responsive audio timeline with click-to-seek on top of the HTML5 Audio API took more finesse than expected. Integrating yt-dlp for YouTube downloads meant spawning external processes, tracking progress in real time, and handling failure gracefully — all within Electron's process model.`,
+      },
+      {
+        heading: "Motivation",
+        text: `Wanted a music player that matched how I actually like using a computer — keyboard-first, minimal, no bloat. Everything out there was either Spotify-shaped or stuck in the 2000s. So I built one that feels like a terminal but plays music. The yt-dlp integration came naturally — if I'm already in a command-line interface, I should be able to paste a YouTube link and have the track ready to play in seconds.`,
+      },
+      {
+        heading: "The time it took",
+        text: `About two weeks. The first week was getting the Electron shell, command input, basic audio playback, and the playlist system — persistence with JSON, queue management, auto-advance, and the side drawer UI. The second week was YouTube downloading, progress tracking, polish, and edge-case handling around file formats and broken paths.`,
+      },
+      {
+        heading: "Technologies I learned and practices I applied",
+        text: `First real project with Electron — learned how main and renderer processes communicate via IPC, how to manage window state, and the quirks of packaging a desktop app. Built a modular command handler architecture: a CommandProcessor parses input, an Orchestrator routes to specialised handlers (playback, playlists, downloads), and a PrinterModule handles all formatted output. Used the HTML5 Audio API for playback and yt-dlp integration for downloading. Everything stores locally in JSON — no cloud, no accounts, no tracking.`,
       },
     ],
   },
