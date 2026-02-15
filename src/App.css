@@ -4,8 +4,9 @@
   gap: 0;
   align-items: stretch;
   padding: 8vh 20%;
-  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --- Centered mode (no file open) --- */
@@ -36,17 +37,20 @@
 .layout__sidebar {
   display: flex;
   flex-direction: column;
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              min-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    min-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .terminal {
   width: 100%;
   flex: 1;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
-  background-color: var(--color-bg);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -102,10 +106,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
-  background-color: var(--color-bg);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
   overflow: hidden;
 }
 
@@ -114,8 +120,8 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-2) var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-  background-color: var(--color-bg-header);
+  border-bottom: 1px solid var(--glass-border);
+  background-color: var(--glass-bg-header);
 }
 
 .content-panel__path {
@@ -272,6 +278,18 @@
   padding-left: var(--space-4);
 }
 
+.file-content__testimonial {
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.file-content__testimonial:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .file-content__skill-group {
   margin-bottom: var(--space-4);
 }
@@ -316,6 +334,46 @@
 
 .file-content__skill-project-link:hover {
   opacity: 1;
+}
+
+.file-content__interest-toggle {
+  background: none;
+  border: none;
+  color: var(--color-accent-primary);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition: opacity 0.15s;
+}
+
+.file-content__interest-toggle:hover {
+  opacity: 0.7;
+}
+
+.file-content__book-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2) 0 0 var(--space-4);
+  overflow: hidden;
+}
+
+.file-content__book-item {
+  padding: var(--space-1) 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  border-bottom: none;
+}
+
+.file-content__interest-note {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+  padding-left: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-style: italic;
 }
 
 /* --- Responsive --- */

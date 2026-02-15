@@ -105,7 +105,7 @@ export const projects = [
   },
   {
     id: "video-editor",
-    name: "Browser Video Editor",
+    name: "AI Video Editor",
     fileName: "video-editor.md",
     tags: [
       "Next.js",

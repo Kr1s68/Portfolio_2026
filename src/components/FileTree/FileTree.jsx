@@ -38,7 +38,9 @@ const TREE = [
   {
     id: "testimonials",
     label: "testimonials",
-    files: [{ id: "rec-stefan-lederer", label: "stefan-lederer.txt" }],
+    files: [
+      { id: "all-testimonials", label: "testimonials.txt" },
+    ],
   },
   {
     id: "about",

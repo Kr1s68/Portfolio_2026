@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   padding: var(--space-2) var(--space-4);
-  background-color: var(--color-bg-header);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--glass-bg-header);
+  border-bottom: 1px solid var(--glass-border);
   border-radius: 8px 8px 0 0;
   user-select: none;
   overflow: hidden;
