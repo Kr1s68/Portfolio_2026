@@ -254,3 +254,23 @@
   font-size: var(--font-size-sm);
   padding: var(--space-4) 0;
 }
+
+/* --- Mobile --- */
+
+@media (max-width: 768px) {
+  .gh-activity__timeline {
+    gap: var(--space-4);
+  }
+
+  .gh-activity__title {
+    word-break: break-word;
+  }
+
+  .gh-activity__details {
+    padding-left: var(--space-2);
+  }
+
+  .gh-activity__detail-line--list {
+    padding-left: var(--space-2);
+  }
+}

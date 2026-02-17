@@ -432,4 +432,20 @@
   .layout__panel {
     min-height: 50vh;
   }
+
+  .file-content--split {
+    flex-direction: column;
+  }
+
+  .file-content__right {
+    width: 100%;
+  }
+
+  .file-content__github-link p {
+    display: none;
+  }
+
+  .file-content__github-link {
+    margin-left: auto;
+  }
 }

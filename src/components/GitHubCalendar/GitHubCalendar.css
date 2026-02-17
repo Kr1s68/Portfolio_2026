@@ -7,6 +7,7 @@
 .github-cal {
   font-family: var(--font-mono);
   padding: var(--space-2) 0;
+  --cal-col-size: 25px;
 }
 
 /* --- Header / Summary --- */
@@ -52,7 +53,6 @@
   color: var(--color-text-muted);
   font-size: 16px;
   white-space: nowrap;
-  margin-inline: calc(0.5ch + var(--space-4));
 }
 
 /* --- Grid (day labels + cells) --- */
@@ -198,4 +198,63 @@
   color: var(--color-accent-error);
   font-size: var(--font-size-sm);
   padding: var(--space-4) 0;
+}
+
+/* --- Mobile --- */
+
+@media (max-width: 768px) {
+  .github-cal {
+    max-width: 100%;
+    min-width: 0;
+    --cal-col-size: 7px;
+  }
+
+  .github-cal__header {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .github-cal__grid-wrapper {
+    padding-left: 0;
+  }
+
+  .github-cal__months {
+    padding-left: var(--space-1);
+  }
+
+  .github-cal__month {
+    font-size: 10px;
+    margin-inline: 0;
+  }
+
+  .github-cal__day-labels {
+    display: none;
+  }
+
+  .github-cal__cells {
+    gap: 2px;
+  }
+
+  .github-cal__week {
+    gap: 2px;
+  }
+
+  .github-cal__cell {
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+  }
+
+  .github-cal__tooltip {
+    font-size: 11px;
+  }
+
+  .github-cal__legend-label {
+    font-size: 10px;
+  }
+
+  .github-cal__legend-cell {
+    width: 10px;
+    height: 10px;
+  }
 }

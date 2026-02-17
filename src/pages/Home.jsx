@@ -14,8 +14,6 @@ import ContactForm from "../sections/ContactSection/ContactForm";
 import Socials from "../sections/ContactSection/Socials";
 import "./App.css";
 
-//TODO: Add a "github.app" file with a github commit history and other data inspired by enscribe.dev
-
 function getFileContent(fileId, onFileSelect) {
   const job = workExperience.find((j) => j.id === fileId);
   if (job)

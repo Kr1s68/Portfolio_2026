@@ -211,7 +211,7 @@ export const github = {
   content_title: "GitHub calendar",
   activity_paragraphs: [
     "Here you can see the terrible code I write now, the terrible code I wrote in the past, and the terrible code I'll write in the future. Just kidding (kind of) — I actually do care about writing good code, most of the time I actually do (I think), however I also like to look back at old projects and stuff I've built, where due to a lack of knowhow or willingness to put effort in, I've written some stuff that even Claude couldn't decipher.",
-    "Some other projects I've built that I didn't list in the projects section: ",
+    "Some other  public projects I've built that I didn't list in the projects section: ",
   ],
   repos: [
     {

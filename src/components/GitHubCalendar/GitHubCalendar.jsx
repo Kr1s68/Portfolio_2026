@@ -133,7 +133,7 @@ export default function GitHubCalendar({
               <span
                 key={i}
                 className="github-cal__month"
-                style={{ marginLeft: offset * 15 }}
+                style={{ marginLeft: `calc(${offset} * var(--cal-col-size))` }}
               >
                 {m.label}
               </span>
