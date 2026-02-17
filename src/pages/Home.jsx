@@ -9,6 +9,7 @@ import { freelanceServices } from "../data/freelanceData";
 import { recommendations } from "../data/recommendationsData";
 import { bio, skills, interests, github } from "../data/aboutData";
 import GithubCalednar from "../components/GithubCalendar/GithubCalendar";
+import GithubActivity from "../components/GithubActivity/GithubActivity";
 import ContactForm from "../sections/ContactSection/ContactForm";
 import Socials from "../sections/ContactSection/Socials";
 import "./App.css";
@@ -382,7 +383,10 @@ function GithubContent() {
           to={today.toISOString()}
         />
       </div>
-      <div className="file-content__right"></div>
+      <div className="file-content__right">
+        <h2 className="file-content__title">Contributions History</h2>
+        <GithubActivity username={github.title} limit={50} />
+      </div>
     </div>
   );
 }
