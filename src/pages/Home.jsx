@@ -376,16 +376,51 @@ function GithubContent() {
   return (
     <div className="file-content file-content--split">
       <div className="file-content__left">
-        <h2 className="file-content__title">{github.title}</h2>
+        <div className="file-content__title-row">
+          <h2 className="file-content__title">{github.content_title}</h2>
+          <a
+            className="file-content__github-link"
+            href={`https://github.com/${github.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View GitHub profile"
+          >
+            <svg
+              className="file-content__github-icon"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+            </svg>
+            <p style={{ marginInline: "10px" }}>
+              {"(Since, you're already here... Please follow me on GitHub)"}
+            </p>
+          </a>
+        </div>
+        <p className="file-content__text">{github.activity_paragraphs[0]}</p>
         <GithubCalednar
-          username={github.title}
+          username={github.name}
           from={sixMonthsAgo.toISOString()}
           to={today.toISOString()}
         />
+        <h3 className="file-content__section-heading">
+          {github.activity_paragraphs[1]}
+        </h3>
+        <ul className="file-content__list">
+          {github.repos.map((repo, i) => (
+            <li key={i}>
+              <a href={repo.url} target="_blank" rel="noopener noreferrer">
+                {repo.name}
+              </a>
+              <p className="file-content__text">{repo.description}</p>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="file-content__right">
-        <h2 className="file-content__title">Contributions History</h2>
-        <GithubActivity username={github.title} limit={50} />
+        <h2 className="file-content__title">Public Contributions History</h2>
+        <GithubActivity username={github.name} limit={50} />
       </div>
     </div>
   );

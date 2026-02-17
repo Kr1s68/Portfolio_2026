@@ -207,5 +207,35 @@ export const interests = [
 ];
 
 export const github = {
-  title: "Kr1s68",
+  name: "Kr1s68",
+  content_title: "GitHub calendar",
+  activity_paragraphs: [
+    "Here you can see the terrible code I write now, the terrible code I wrote in the past, and the terrible code I'll write in the future. Just kidding (kind of) — I actually do care about writing good code, most of the time I actually do (I think), however I also like to look back at old projects and stuff I've built, where due to a lack of knowhow or willingness to put effort in, I've written some stuff that even Claude couldn't decipher.",
+    "Some other projects I've built that I didn't list in the projects section: ",
+  ],
+  repos: [
+    {
+      name: "reflect-app",
+      url: "https://github.com/Kr1s68/reflect-app",
+      description:
+        "This was a part of my Mobile Software Development course at university. It was an interesting project, especially since I had already worked with Kotlin and I could do whatever I wanted with the app and the way it's architected. Ended up building a journaling app, since right now I'm trying to focus on writing a bit more and expanding the way I express myself and my thoughts.",
+    },
+    {
+      name: "habit-tracker",
+      url: "https://github.com/Kr1s68/habit-tracker",
+      description:
+        "Also a uni project. Didn't spend much time on it, since a part of the requirements was that it was a CLI application. I don't really see the point of building a habit tracker that doesn't even have a UI, but it was a fun little project to do nonetheless.",
+    },
+    {
+      name: "dream-builder",
+      url: "https://github.com/Kr1s68/pcbuilder-frontend",
+      description: `This was my highschool graduation project. I have it listed in the projects section, however I didn't include a link to github on purpose. If you read the "Terrible code" bit above, this is the epitome of that. I had no idea how to build a frontend application, so I just threw together some code that barely worked, however it worked nonetheless, so I  just went with it. It's actually kind of impressive that it worked at all, considering how bad the code is. I cringe every time I look at it, but it's also a reminder of how far I've come since then. It also looks terrible, building an application that looks vibe-coded, before vibe-coding was a thing is a feat within itself.`,
+    },
+    {
+      name: "this portfolio",
+      url: "https://github.com/Kr1s68/Portfolio_2026",
+      description:
+        "I'm actually really proud of this one. It feels like my sense of taste for webdesign has finally matured to a point where I can look at the things I built and feel good about them. ",
+    },
+  ],
 };

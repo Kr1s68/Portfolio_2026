@@ -171,6 +171,34 @@
   flex-shrink: 0;
 }
 
+.file-content__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.file-content__title-row .file-content__title {
+  margin-bottom: 0;
+}
+
+.file-content__github-link {
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-terminal);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.file-content__github-link:hover {
+  color: var(--color-text-primary);
+}
+
+.file-content__github-icon {
+  width: 1.25em;
+  height: 1.25em;
+}
+
 .file-content__title {
   color: var(--color-accent-secondary);
   font-size: var(--font-size-xl);

@@ -57,7 +57,7 @@ async function fetchPushCommits(repoName, before, head, signal) {
 
     return {
       count: commits.length,
-      messages: commits.map((c) => c.commit.message.split("\n")[0]),
+      messages: commits.map((c) => c.commit.message),
     };
   } catch {
     return { count: 0, messages: [] };
@@ -92,7 +92,7 @@ function normaliseEvent(raw) {
           title: `Pushed ${count} commit${count !== 1 ? "s" : ""} to ${base.repo}`,
           details: commits
             .filter((c) => c.distinct !== false)
-            .map((c) => c.message.split("\n")[0]),
+            .map((c) => c.message),
         };
       }
 

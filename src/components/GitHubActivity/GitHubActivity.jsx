@@ -1,23 +1,99 @@
-import { useMemo } from 'react'
-import { useGitHubActivity, EVENT_TYPES } from '../../hooks/useGitHubActivity'
-import './GitHubActivity.css'
+import { useMemo } from "react";
+import { useGitHubActivity, EVENT_TYPES } from "../../hooks/useGitHubActivity";
+import "./GitHubActivity.css";
+
+/**
+ * Parses inline markdown into React elements.
+ * Handles: ***bold italic***, **bold**, *italic*, `code`, ~~strikethrough~~
+ *
+ * @param {string} text — raw markdown string (single line)
+ * @returns {Array<string | JSX.Element>}
+ */
+function parseInlineMarkdown(text) {
+  if (!text) return [text];
+
+  const tokens = [];
+  let remaining = text;
+  let key = 0;
+
+  /* Pattern order matters — longest/most specific first */
+  const patterns = [
+    {
+      regex: /\*\*\*(.+?)\*\*\*/,
+      tag: "strong",
+      className: "gh-activity__md-bold-italic",
+      italic: true,
+    },
+    {
+      regex: /\*\*(.+?)\*\*/,
+      tag: "strong",
+      className: "gh-activity__md-bold",
+    },
+    { regex: /\*(.+?)\*/, tag: "em", className: "gh-activity__md-italic" },
+    { regex: /```(.+?)```/, tag: "code", className: "gh-activity__md-code" },
+    { regex: /~~(.+?)~~/, tag: "s", className: "gh-activity__md-strike" },
+  ];
+
+  while (remaining.length > 0) {
+    let earliest = null;
+    let matchedPattern = null;
+
+    for (const pattern of patterns) {
+      const match = remaining.match(pattern.regex);
+      if (match && (earliest === null || match.index < earliest.index)) {
+        earliest = match;
+        matchedPattern = pattern;
+      }
+    }
+
+    if (!earliest || !matchedPattern) {
+      tokens.push(remaining);
+      break;
+    }
+
+    if (earliest.index > 0) {
+      tokens.push(remaining.slice(0, earliest.index));
+    }
+
+    const Tag = matchedPattern.tag;
+    const inner = earliest[1];
+
+    if (matchedPattern.italic) {
+      tokens.push(
+        <Tag key={key++} className={matchedPattern.className}>
+          <em>{inner}</em>
+        </Tag>,
+      );
+    } else {
+      tokens.push(
+        <Tag key={key++} className={matchedPattern.className}>
+          {inner}
+        </Tag>,
+      );
+    }
+
+    remaining = remaining.slice(earliest.index + earliest[0].length);
+  }
+
+  return tokens;
+}
 
 /**
  * Maps event types to short terminal-style prefixes.
  * These appear before each entry for quick visual scanning.
  */
 const TYPE_PREFIXES = {
-  PushEvent: 'PUSH',
-  PullRequestEvent: 'PR',
-  IssuesEvent: 'ISSUE',
-  CreateEvent: 'NEW',
-  ForkEvent: 'FORK',
-  WatchEvent: 'STAR',
-  DeleteEvent: 'DEL',
-  ReleaseEvent: 'REL',
-  IssueCommentEvent: 'COMMENT',
-  PullRequestReviewEvent: 'REVIEW',
-}
+  PushEvent: "PUSH",
+  PullRequestEvent: "PR",
+  IssuesEvent: "ISSUE",
+  CreateEvent: "NEW",
+  ForkEvent: "FORK",
+  WatchEvent: "STAR",
+  DeleteEvent: "DEL",
+  ReleaseEvent: "REL",
+  IssueCommentEvent: "COMMENT",
+  PullRequestReviewEvent: "REVIEW",
+};
 
 /**
  * Maps event types to CSS modifier suffixes for colour coding.
@@ -29,17 +105,17 @@ const TYPE_PREFIXES = {
  * Override colours in the CSS file to restyle.
  */
 const TYPE_MODIFIERS = {
-  PushEvent: 'push',
-  PullRequestEvent: 'pr',
-  IssuesEvent: 'issue',
-  CreateEvent: 'create',
-  ForkEvent: 'fork',
-  WatchEvent: 'star',
-  DeleteEvent: 'delete',
-  ReleaseEvent: 'release',
-  IssueCommentEvent: 'comment',
-  PullRequestReviewEvent: 'review',
-}
+  PushEvent: "push",
+  PullRequestEvent: "pr",
+  IssuesEvent: "issue",
+  CreateEvent: "create",
+  ForkEvent: "fork",
+  WatchEvent: "star",
+  DeleteEvent: "delete",
+  ReleaseEvent: "release",
+  IssueCommentEvent: "comment",
+  PullRequestReviewEvent: "review",
+};
 
 /**
  * Formats an ISO date string into a compact terminal-style date.
@@ -50,15 +126,15 @@ const TYPE_MODIFIERS = {
  * @returns {string}
  */
 function formatDate(iso) {
-  const date = new Date(iso)
-  const now = new Date()
-  const sameYear = date.getFullYear() === now.getFullYear()
+  const date = new Date(iso);
+  const now = new Date();
+  const sameYear = date.getFullYear() === now.getFullYear();
 
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: '2-digit',
-    ...(sameYear ? {} : { year: 'numeric' }),
-  })
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    ...(sameYear ? {} : { year: "numeric" }),
+  });
 }
 
 /**
@@ -68,19 +144,19 @@ function formatDate(iso) {
  * @returns {Array<{ date: string, label: string, events: Array }>}
  */
 function groupByDate(events) {
-  const groups = []
-  let currentKey = null
+  const groups = [];
+  let currentKey = null;
 
   for (const event of events) {
-    const dayKey = event.date.slice(0, 10)
+    const dayKey = event.date.slice(0, 10);
     if (dayKey !== currentKey) {
-      currentKey = dayKey
-      groups.push({ date: dayKey, label: formatDate(event.date), events: [] })
+      currentKey = dayKey;
+      groups.push({ date: dayKey, label: formatDate(event.date), events: [] });
     }
-    groups[groups.length - 1].events.push(event)
+    groups[groups.length - 1].events.push(event);
   }
 
-  return groups
+  return groups;
 }
 
 /**
@@ -99,43 +175,43 @@ function groupByDate(events) {
  * @param {string}   [props.className]    — additional CSS class for the root element
  */
 export default function GitHubActivity({
-  username = 'Kr1s68',
+  username = "Kr1s68",
   limit = 30,
   eventTypes,
   showDetails = true,
   groupByDay = true,
-  className = '',
+  className = "",
 }) {
   const { events, status, error } = useGitHubActivity(username, {
     limit,
     eventTypes,
-  })
+  });
 
   const grouped = useMemo(
     () => (groupByDay ? groupByDate(events) : null),
     [events, groupByDay],
-  )
+  );
 
   /* ---------- Loading ---------- */
-  if (status === 'loading' || status === 'idle') {
+  if (status === "loading" || status === "idle") {
     return (
       <div className={`gh-activity ${className}`}>
         <div className="gh-activity__loading">
           <span className="gh-activity__spinner">[ ]</span> Fetching activity…
         </div>
       </div>
-    )
+    );
   }
 
   /* ---------- Error ---------- */
-  if (status === 'error') {
+  if (status === "error") {
     return (
       <div className={`gh-activity ${className}`}>
         <div className="gh-activity__error">
-          [ERR] {error || 'Failed to load activity data.'}
+          [ERR] {error || "Failed to load activity data."}
         </div>
       </div>
-    )
+    );
   }
 
   /* ---------- Empty ---------- */
@@ -144,7 +220,7 @@ export default function GitHubActivity({
       <div className={`gh-activity ${className}`}>
         <div className="gh-activity__empty">No recent activity found.</div>
       </div>
-    )
+    );
   }
 
   /* ---------- Grouped view ---------- */
@@ -152,7 +228,9 @@ export default function GitHubActivity({
     return (
       <div className={`gh-activity ${className}`}>
         <div className="gh-activity__header">
-          <span className="gh-activity__count">{events.length} events</span>
+          <span className="gh-activity__count">
+            Last {events.length} events
+          </span>
           <span className="gh-activity__user">@{username}</span>
         </div>
 
@@ -173,7 +251,7 @@ export default function GitHubActivity({
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   /* ---------- Flat view ---------- */
@@ -195,7 +273,46 @@ export default function GitHubActivity({
         ))}
       </div>
     </div>
-  )
+  );
+}
+
+/**
+ * Renders a multi-line commit message with proper line breaks
+ * and markdown list item support.
+ *
+ * Lines starting with "- " are rendered as list items with a bullet.
+ * All other non-empty lines are rendered as plain text with inline markdown.
+ * Empty lines are collapsed into spacing between blocks.
+ *
+ * @param {string} text — full commit message (may contain \n)
+ * @param {number} baseKey — key offset for React elements
+ * @returns {Array<JSX.Element>}
+ */
+function renderDetailLines(text, baseKey) {
+  const lines = text.split("\n");
+  const elements = [];
+  let key = baseKey;
+
+  for (const line of lines) {
+    const trimmed = line.trimEnd();
+    if (!trimmed) continue;
+
+    if (trimmed.startsWith("- ")) {
+      elements.push(
+        <span key={key++} className="gh-activity__detail-line gh-activity__detail-line--list">
+          {parseInlineMarkdown(trimmed.slice(2))}
+        </span>,
+      );
+    } else {
+      elements.push(
+        <span key={key++} className="gh-activity__detail-line">
+          {parseInlineMarkdown(trimmed)}
+        </span>,
+      );
+    }
+  }
+
+  return elements;
 }
 
 /**
@@ -208,8 +325,8 @@ export default function GitHubActivity({
  * @param {boolean} [props.showDate]  — show inline date (for flat view)
  */
 function ActivityEntry({ event, showDetails, showDate = false }) {
-  const modifier = TYPE_MODIFIERS[event.type] || 'default'
-  const prefix = TYPE_PREFIXES[event.type] || 'EVENT'
+  const modifier = TYPE_MODIFIERS[event.type] || "default";
+  const prefix = TYPE_PREFIXES[event.type] || "EVENT";
 
   return (
     <div className="gh-activity__entry">
@@ -229,14 +346,14 @@ function ActivityEntry({ event, showDetails, showDate = false }) {
         <ul className="gh-activity__details">
           {event.details.map((detail, i) => (
             <li key={i} className="gh-activity__detail">
-              → {detail}
+              {renderDetailLines(detail, i * 1000)}
             </li>
           ))}
         </ul>
       )}
     </div>
-  )
+  );
 }
 
 /* Re-export for consumers who want to reference valid types */
-export { EVENT_TYPES }
+export { EVENT_TYPES };
