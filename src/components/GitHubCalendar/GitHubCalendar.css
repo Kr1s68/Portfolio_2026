@@ -37,7 +37,6 @@
 .github-cal__grid-wrapper {
   overflow-x: auto;
   padding-bottom: var(--space-2);
-  padding-left: calc(2ch + var(--space-4));
 }
 
 /* --- Month labels --- */
