@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kboyanov19.netlify.app/sitemap.xml
