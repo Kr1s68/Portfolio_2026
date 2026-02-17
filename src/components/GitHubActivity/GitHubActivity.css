@@ -1,0 +1,207 @@
+/* ============================================================
+   GitHubActivity — contribution activity feed
+   BEM block: gh-activity
+   All values reference tokens.css — no hardcoded colors/spacing
+   ============================================================ */
+
+.gh-activity {
+  font-family: var(--font-mono);
+  padding: var(--space-2) 0;
+}
+
+/* --- Header --- */
+
+.gh-activity__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.gh-activity__count {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.gh-activity__user {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* --- Timeline (grouped view) --- */
+
+.gh-activity__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* --- Day group --- */
+
+.gh-activity__day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gh-activity__date {
+  color: var(--color-accent-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* --- Entries container --- */
+
+.gh-activity__entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* --- Single entry --- */
+
+.gh-activity__entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.gh-activity__entry-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* --- Event type tag ---
+   Each event type gets its own colour via modifier classes.
+   Override these to restyle individual event types. */
+
+.gh-activity__tag {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Push events — primary accent (teal) */
+.gh-activity__tag--push {
+  color: var(--color-accent-primary);
+}
+
+/* Pull requests — secondary accent (orange) */
+.gh-activity__tag--pr {
+  color: var(--color-accent-secondary);
+}
+
+/* Issues — warning (yellow) */
+.gh-activity__tag--issue {
+  color: var(--color-accent-warn);
+}
+
+/* Create — success (green) */
+.gh-activity__tag--create {
+  color: var(--color-accent-ok);
+}
+
+/* Fork — dim accent */
+.gh-activity__tag--fork {
+  color: var(--color-accent-dim);
+}
+
+/* Star — secondary accent */
+.gh-activity__tag--star {
+  color: var(--color-accent-secondary);
+}
+
+/* Delete — error (red) */
+.gh-activity__tag--delete {
+  color: var(--color-accent-error);
+}
+
+/* Release — primary accent */
+.gh-activity__tag--release {
+  color: var(--color-accent-primary);
+}
+
+/* Comment — secondary text */
+.gh-activity__tag--comment {
+  color: var(--color-text-secondary);
+}
+
+/* Review — dim accent */
+.gh-activity__tag--review {
+  color: var(--color-accent-dim);
+}
+
+/* Fallback */
+.gh-activity__tag--default {
+  color: var(--color-text-muted);
+}
+
+/* --- Event title --- */
+
+.gh-activity__title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+/* --- Inline date (flat view) --- */
+
+.gh-activity__inline-date {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* --- Detail lines (commit messages, PR titles, etc.) --- */
+
+.gh-activity__details {
+  list-style: none;
+  margin: 0;
+  padding-left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gh-activity__detail {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+}
+
+/* --- Empty state --- */
+
+.gh-activity__empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  padding: var(--space-4) 0;
+}
+
+/* --- Loading state --- */
+
+.gh-activity__loading {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-4) 0;
+}
+
+.gh-activity__spinner {
+  color: var(--color-accent-primary);
+  animation: blink 1s step-end infinite;
+}
+
+/* --- Error state --- */
+
+.gh-activity__error {
+  color: var(--color-accent-error);
+  font-size: var(--font-size-sm);
+  padding: var(--space-4) 0;
+}

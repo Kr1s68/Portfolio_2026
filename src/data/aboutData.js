@@ -193,7 +193,7 @@ export const interests = [
       "Slaughterhouse-Five — Kurt Vonnegut",
       "The Idiot — Fyodor Dostoevsky",
     ],
-    note: `Modern self-help books like Atomic Habits or The 48 Laws of Power, while helpful in their own right, miss the mark when it comes to being genuinely inspirational or thought-provoking. They tend to be bland and uninteresting — repackaging simple life lessons that anyone picks up just by living into these "breakthrough" discoveries on human nature, sold as the key to turning you into some kind of super-human. The ideas aren't bad, they're just dressed up to sound more revolutionary than they are. Books should be about ideas passed through characters and storytelling — letting the reader sit with what's happening, interpret it through their own lens, and arrive at their own conclusions. That's what sticks with you. Not a numbered list of habits to optimise your morning routine, but a scene from Dostoevsky that quietly rewires how you think about guilt, or a page of Camus that makes you reconsider what it even means to live well. \n That's just me ranting about books though.`,
+    note: `Some thoughts on why I don't like the whole "Self-Improvement" genre of books: \n Modern self-help books like Atomic Habits or The 48 Laws of Power, while helpful in their own right, miss the mark when it comes to being genuinely inspirational or thought-provoking. They tend to be bland and uninteresting — repackaging simple life lessons that anyone picks up just by living into these \"breakthrough\" discoveries on human nature, sold as the key to turning you into some kind of super-human. The ideas aren't bad, they're just dressed up to sound more revolutionary than they are. Books should be about ideas passed through characters and storytelling — letting the reader sit with what's happening, interpret it through their own lens, and arrive at their own conclusions. That's what sticks with you. Not a numbered list of habits to optimise your morning routine, but a scene from Dostoevsky that quietly rewires how you think about guilt, or a page of Camus that makes you reconsider what it even means to live well. \n That's just me ranting about books though.`,
   },
   {
     text: "Hiking & Camping — getting away from screens and into the mountains whenever possible",
@@ -205,3 +205,7 @@ export const interests = [
     text: "Continuous learning — always picking up new tools, languages, and paradigms",
   },
 ];
+
+export const github = {
+  title: "Kr1s68",
+};

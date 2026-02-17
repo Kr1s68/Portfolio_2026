@@ -1,0 +1,201 @@
+/* ============================================================
+   GitHubCalendar — contribution heatmap grid
+   BEM block: github-cal
+   All values reference tokens.css — no hardcoded colors/spacing
+   ============================================================ */
+
+.github-cal {
+  font-family: var(--font-mono);
+  padding: var(--space-2) 0;
+}
+
+/* --- Header / Summary --- */
+
+.github-cal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.github-cal__total {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.github-cal__period {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* --- Grid wrapper (scrollable on narrow viewports) --- */
+
+.github-cal__grid-wrapper {
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  padding-left: calc(4ch + var(--space-4));
+}
+
+/* --- Month labels --- */
+
+.github-cal__months {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: var(--space-1);
+  padding-left: calc(4ch + var(--space-3));
+}
+
+.github-cal__month {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  white-space: nowrap;
+  margin-inline: calc(0.5ch + var(--space-4));
+}
+
+/* --- Grid (day labels + cells) --- */
+
+.github-cal__grid {
+  display: flex;
+  gap: var(--space-1);
+}
+
+/* --- Day-of-week labels (vertical) --- */
+
+.github-cal__day-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-right: var(--space-2);
+}
+
+.github-cal__day-label {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  height: 20px;
+  line-height: 20px;
+  width: 3ch;
+  text-align: right;
+}
+
+/* --- Week columns --- */
+
+.github-cal__cells {
+  display: flex;
+  gap: 5px;
+}
+
+.github-cal__week {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* --- Individual cell --- */
+
+.github-cal__cell {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: outline var(--duration-fast) var(--ease-terminal);
+}
+
+.github-cal__cell:hover {
+  outline: 1px solid var(--color-text-secondary);
+  outline-offset: 1px;
+}
+
+/* --- Intensity levels (teal accent scale) --- */
+
+.github-cal__cell--level-0 {
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+}
+
+.github-cal__cell--level-1 {
+  background-color: rgba(0, 212, 170, 0.15);
+}
+
+.github-cal__cell--level-2 {
+  background-color: rgba(0, 212, 170, 0.35);
+}
+
+.github-cal__cell--level-3 {
+  background-color: rgba(0, 212, 170, 0.6);
+}
+
+.github-cal__cell--level-4 {
+  background-color: var(--color-accent-primary);
+}
+
+/* --- Tooltip (static text below grid) --- */
+
+.github-cal__tooltip {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  min-height: 1.5em;
+}
+
+.github-cal__tooltip-count {
+  color: var(--color-accent-primary);
+  font-weight: 600;
+}
+
+.github-cal__tooltip-date {
+  color: var(--color-text-primary);
+}
+
+.github-cal__tooltip-hint {
+  color: var(--color-text-muted);
+}
+
+/* --- Legend --- */
+
+.github-cal__legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-3);
+}
+
+.github-cal__legend-label {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  padding: 0 var(--space-1);
+}
+
+.github-cal__legend-cell {
+  width: 16px;
+  height: 16px;
+  cursor: default;
+}
+
+.github-cal__legend-cell:hover {
+  outline: none;
+}
+
+/* --- Loading state --- */
+
+.github-cal__loading {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-4) 0;
+}
+
+.github-cal__spinner {
+  color: var(--color-accent-primary);
+  animation: blink 1s step-end infinite;
+}
+
+/* --- Error state --- */
+
+.github-cal__error {
+  color: var(--color-accent-error);
+  font-size: var(--font-size-sm);
+  padding: var(--space-4) 0;
+}
