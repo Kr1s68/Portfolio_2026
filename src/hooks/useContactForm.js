@@ -1,9 +1,9 @@
 import { useRef, useState, useCallback } from 'react'
 import emailjs from '@emailjs/browser'
 
-const SERVICE_ID = 'service_kcihpts'
-const TEMPLATE_ID = 'template_wwan76r'
-const PUBLIC_KEY = 'BRQIzv6DfpMLYCmej'
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 export function useContactForm() {
   const formRef = useRef(null)
