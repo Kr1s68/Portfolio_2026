@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { useGitHubContributions } from '../../hooks/useGitHubContributions'
-import './GitHubCalendar.css'
+import { useState } from "react";
+import { useGitHubContributions } from "../../hooks/useGitHubContributions";
+import "./GitHubCalendar.css";
+
+//TODO: Add a caching function for github calendar data
 
 /**
  * Maps a contribution count to an intensity level (0–4)
@@ -11,12 +13,12 @@ import './GitHubCalendar.css'
  * @returns {0 | 1 | 2 | 3 | 4}
  */
 function getIntensityLevel(count, maxCount) {
-  if (count === 0 || maxCount === 0) return 0
-  const ratio = count / maxCount
-  if (ratio <= 0.25) return 1
-  if (ratio <= 0.5) return 2
-  if (ratio <= 0.75) return 3
-  return 4
+  if (count === 0 || maxCount === 0) return 0;
+  const ratio = count / maxCount;
+  if (ratio <= 0.25) return 1;
+  if (ratio <= 0.5) return 2;
+  if (ratio <= 0.75) return 3;
+  return 4;
 }
 
 /**
@@ -27,28 +29,28 @@ function getIntensityLevel(count, maxCount) {
  * @returns {Array<{ label: string, weekIndex: number }>}
  */
 function getMonthLabels(weeks) {
-  const labels = []
-  let lastMonth = null
+  const labels = [];
+  let lastMonth = null;
 
   weeks.forEach((week, weekIndex) => {
-    const firstDay = week.contributionDays[0]
-    if (!firstDay) return
+    const firstDay = week.contributionDays[0];
+    if (!firstDay) return;
 
-    const month = new Date(firstDay.date).toLocaleString('en-US', {
-      month: 'short',
-    })
+    const month = new Date(firstDay.date).toLocaleString("en-US", {
+      month: "short",
+    });
 
     if (month !== lastMonth) {
-      labels.push({ label: month, weekIndex })
-      lastMonth = month
+      labels.push({ label: month, weekIndex });
+      lastMonth = month;
     }
-  })
+  });
 
-  return labels
+  return labels;
 }
 
 /** Day-of-week labels — only Mon / Wed / Fri to avoid clutter */
-const DAY_LABELS = ['', 'Mon', '', 'Wed', '', 'Fri', '']
+const DAY_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""];
 
 /**
  * GitHub contribution calendar heatmap.
@@ -62,16 +64,12 @@ const DAY_LABELS = ['', 'Mon', '', 'Wed', '', 'Fri', '']
  * @param {string}  props.from     — ISO 8601 date string — period start
  * @param {string}  props.to       — ISO 8601 date string — period end
  */
-export default function GitHubCalendar({
-  username = 'Kr1s68',
-  from,
-  to,
-}) {
-  const { data, status, error } = useGitHubContributions(username, from, to)
-  const [tooltip, setTooltip] = useState(null)
+export default function GitHubCalendar({ username = "Kr1s68", from, to }) {
+  const { data, status, error } = useGitHubContributions(username, from, to);
+  const [tooltip, setTooltip] = useState(null);
 
   /* ---------- Loading ---------- */
-  if (status === 'loading' || status === 'idle') {
+  if (status === "loading" || status === "idle") {
     return (
       <div className="github-cal">
         <div className="github-cal__loading">
@@ -79,35 +77,35 @@ export default function GitHubCalendar({
           contributions…
         </div>
       </div>
-    )
+    );
   }
 
   /* ---------- Error ---------- */
-  if (status === 'error') {
+  if (status === "error") {
     return (
       <div className="github-cal">
         <div className="github-cal__error">
-          [ERR] {error || 'Failed to load contribution data.'}
+          [ERR] {error || "Failed to load contribution data."}
         </div>
       </div>
-    )
+    );
   }
 
   /* ---------- Success ---------- */
-  const { totalContributions, weeks } = data
+  const { totalContributions, weeks } = data;
 
   const allCounts = weeks.flatMap((w) =>
     w.contributionDays.map((d) => d.contributionCount),
-  )
-  const maxCount = Math.max(...allCounts, 1)
-  const monthLabels = getMonthLabels(weeks)
+  );
+  const maxCount = Math.max(...allCounts, 1);
+  const monthLabels = getMonthLabels(weeks);
 
   const formatDate = (iso) =>
-    new Date(iso).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    })
+    new Date(iso).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
 
   return (
     <div className="github-cal">
@@ -127,8 +125,8 @@ export default function GitHubCalendar({
         <div className="github-cal__months">
           <div className="github-cal__day-label-spacer" />
           {monthLabels.map((m, i) => {
-            const prevEnd = i === 0 ? 0 : monthLabels[i - 1].weekIndex
-            const offset = i === 0 ? m.weekIndex : m.weekIndex - prevEnd - 1
+            const prevEnd = i === 0 ? 0 : monthLabels[i - 1].weekIndex;
+            const offset = i === 0 ? m.weekIndex : m.weekIndex - prevEnd - 1;
             return (
               <span
                 key={i}
@@ -137,7 +135,7 @@ export default function GitHubCalendar({
               >
                 {m.label}
               </span>
-            )
+            );
           })}
         </div>
 
@@ -159,7 +157,7 @@ export default function GitHubCalendar({
                   const level = getIntensityLevel(
                     day.contributionCount,
                     maxCount,
-                  )
+                  );
                   return (
                     <div
                       key={day.date}
@@ -173,7 +171,7 @@ export default function GitHubCalendar({
                       onMouseLeave={() => setTooltip(null)}
                       aria-label={`${day.contributionCount} contributions on ${day.date}`}
                     />
-                  )
+                  );
                 })}
               </div>
             ))}
@@ -186,15 +184,15 @@ export default function GitHubCalendar({
         {tooltip ? (
           <>
             <span className="github-cal__tooltip-count">
-              {tooltip.count} contribution{tooltip.count !== 1 ? 's' : ''}
+              {tooltip.count} contribution{tooltip.count !== 1 ? "s" : ""}
             </span>
-            {' on '}
+            {" on "}
             <span className="github-cal__tooltip-date">
-              {new Date(tooltip.date).toLocaleDateString('en-US', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
+              {new Date(tooltip.date).toLocaleDateString("en-US", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
               })}
             </span>
           </>
@@ -217,5 +215,5 @@ export default function GitHubCalendar({
         <span className="github-cal__legend-label">More</span>
       </div>
     </div>
-  )
+  );
 }

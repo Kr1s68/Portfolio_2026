@@ -1,9 +1,9 @@
 :root {
   /* Background */
-  --color-bg: #0a0a0a;
-  --color-bg-elevated: #111111;
-  --color-bg-header: #1a1a1a;
-  --color-border: #2a2a2a;
+  --color-bg: #050505;
+  --color-bg-elevated: #0c0c0c;
+  --color-bg-header: #141414;
+  --color-border: #222222;
 
   /* Accent */
   --color-accent-primary: #00d4aa;
@@ -20,7 +20,7 @@
   --color-text-prompt: #00d4aa;
 
   /* Typography */
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', monospace;
+  --font-mono: "JetBrains Mono", "Fira Code", "IBM Plex Mono", monospace;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -49,11 +49,11 @@
   --ease-terminal: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Glass */
-  --glass-bg: rgba(10, 10, 10, 0.65);
-  --glass-bg-header: rgba(26, 26, 26, 0.6);
+  --glass-bg: rgba(5, 5, 5, 0.7);
+  --glass-bg-header: rgba(14, 14, 14, 0.75);
   --glass-blur: 16px;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
 
   /* Image */
   --scanline-opacity: 0.03;

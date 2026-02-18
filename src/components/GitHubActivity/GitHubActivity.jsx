@@ -299,7 +299,10 @@ function renderDetailLines(text, baseKey) {
 
     if (trimmed.startsWith("- ")) {
       elements.push(
-        <span key={key++} className="gh-activity__detail-line gh-activity__detail-line--list">
+        <span
+          key={key++}
+          className="gh-activity__detail-line gh-activity__detail-line--list"
+        >
           {parseInlineMarkdown(trimmed.slice(2))}
         </span>,
       );

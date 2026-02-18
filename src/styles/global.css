@@ -1,6 +1,8 @@
 body {
   background-color: var(--color-bg);
-  background-image: url("/background.jpeg");
+  background-image:
+    linear-gradient(rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.5)),
+    url("/background.jpeg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
