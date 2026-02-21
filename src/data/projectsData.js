@@ -4,7 +4,7 @@ export const projects = [
     name: "Aromatica Bulgaria",
     fileName: "aromatica-bulgaria.md",
     tags: ["UX/UI Design", "Development", "Continuous Support"],
-    images: ["/aromatica-main-page.png"],
+    images: ["/aromatica-main-page.webp"],
     description: `I had the opportunity to develop this online store from the ground up, utilizing React and Firebase to meet the client's specific requirements. This project was particularly meaningful to me, as it allowed me to merge my technical expertise with my passion for creative design. Not only did I build the entire e-commerce platform, but I also crafted all the branding elements, ensuring a cohesive and visually appealing identity for the store.`,
     sections: [
       {
@@ -30,7 +30,7 @@ export const projects = [
     name: "Studify AI",
     fileName: "studify-ai.md",
     tags: ["Full Stack Development", "Continuous Support", "Consulting"],
-    images: ["/studify-ai-main-page.png"],
+    images: ["/studify-ai-main-page.webp"],
     description: `Initially brought on as a full stack developer for a specific task, I soon found that my alignment with the product's target demographic positioned me to contribute beyond the original scope. As a result, I took on additional responsibilities as a consultant, providing valuable insights and strategic guidance. Ultimately, I played a key role in the successful launch of the product.`,
     sections: [
       {
@@ -56,7 +56,7 @@ export const projects = [
     name: "Dream Builder",
     fileName: "dream-builder.md",
     tags: ["UX/UI Design", "Development", "Personal Project"],
-    images: ["/dream-builder-home-page.png"],
+    images: ["/dream-builder-home-page.webp"],
     description: `My inaugural venture into software product development and marketing served as a pivotal learning experience, encompassing diverse facets of software engineering, social media outreach, and the intricacies of launching a digital service. This project stands as a testament to my unwavering commitment to professional growth and mastery of my craft.`,
     sections: [
       {
@@ -119,10 +119,10 @@ export const projects = [
       "Personal Project",
     ],
     images: [
-      "/video_editor.png",
-      "/timeline.png",
-      "/video_controls.png",
-      "/animation_editor.png",
+      "/video_editor.webp",
+      "/timeline.webp",
+      "/video_controls.webp",
+      "/animation_editor.webp",
     ],
     github: "https://github.com/Kr1s68/video-editor-next",
     description: `Inspired by my time at Bitmovin, I built an AI-integrated video editor that runs entirely in the browser. It uses Remotion for video composition, FFmpeg on the backend for AI-friendly content processing, and Next.js on the frontend with AWS Lambda for cloud rendering. Gemini 2.5 Flash handles intelligent editing assistance, ElevenLabs powers voice generation, and the whole thing is designed to automate the repetitive parts of editing. I shared the prototype with professional editors and influencers in my circle — they reported significant time savings. One of the projects I'm most proud of.`,
@@ -183,7 +183,7 @@ export const projects = [
       "Desktop App",
       "Personal Project",
     ],
-    images: ["/pl4yer-ui.png", "/pl4yer-app-flow.png"],
+    images: ["/pl4yer-ui.webp", "/pl4yer-app-flow.webp"],
     github: "https://github.com/Kr1s68/PL4YER-2",
     description: `A minimalist desktop audio player with a retro console-based interface. Built with Electron and vanilla JavaScript, it combines a command-line aesthetic with modern playback features — playlists, YouTube downloading via yt-dlp, format support across MP3, WAV, OGG, FLAC, and M4A, and a fully local-first architecture with zero telemetry.`,
     sections: [
