@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TerminalHeader from "../components/TerminalHeader/TerminalHeader";
 import TypewriterText from "../components/TypewriterText/TypewriterText";
 import FileTree from "../components/FileTree/FileTree";
+import SEO from "../components/SEO";
 import { workExperience } from "../data/workData";
 import { projects } from "../data/projectsData";
 import { freelanceServices } from "../data/freelanceData";
@@ -97,8 +98,28 @@ export default function App() {
     ? getFileContent(activeFile, handleFileSelect)
     : null;
 
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Kristiyan Boyanov",
+    url: "https://kboyanov19.netlify.app",
+    jobTitle: "Full-Stack Developer",
+    address: { "@type": "PostalAddress", addressLocality: "Vienna", addressCountry: "AT" },
+    sameAs: [
+      "https://linkedin.com/in/kboyanov13/",
+      "https://github.com/kboyanov13",
+      "https://instagram.com/kboyanov13/",
+    ],
+  };
+
   return (
     <div className={`layout ${isSplit ? "layout--split" : "layout--centered"}`}>
+      <SEO
+        title="Kristiyan Boyanov — Portfolio"
+        description="Full-stack developer from Vienna, Austria. Building web apps, AI platforms, and everything in between."
+        path="/"
+        jsonLd={personJsonLd}
+      />
       <div className="layout__sidebar">
         <div className="terminal">
           <TerminalHeader />

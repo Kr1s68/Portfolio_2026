@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { blogPosts } from "../data/blogData";
+import SEO from "../components/SEO";
 import "./BlogPost.css";
 
 const mdFiles = import.meta.glob("/src/content/**/*.md", {
@@ -70,8 +71,25 @@ export default function BlogPost() {
 
   const headings = useMemo(() => extractHeadings(markdown), [markdown]);
 
+  const blogPostJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.excerpt,
+    author: { "@type": "Person", name: blog.author },
+    datePublished: blog.date,
+    url: `https://kboyanov19.netlify.app/blog/${blogId}/${subpostId}`,
+  };
+
   return (
     <div className="post-page">
+      <SEO
+        title={`${currentSubpost.title} — ${blog.title}`}
+        description={blog.excerpt}
+        path={`/blog/${blogId}/${subpostId}`}
+        type="article"
+        jsonLd={blogPostJsonLd}
+      />
       {/* Header */}
       <header className="post-header">
         <div className="post-header__left">

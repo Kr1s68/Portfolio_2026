@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:blogId" element={<BlogPost />} />
       <Route path="/blog/:blogId/:subpostId" element={<BlogPost />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blogData";
+import SEO from "../components/SEO";
 import "./Blog.css";
 
 export default function Blog() {
@@ -27,6 +28,11 @@ export default function Blog() {
 
   return (
     <div className="blog-page">
+      <SEO
+        title="Blog — Kristiyan Boyanov"
+        description="Thoughts, lessons, and reflections from a full-stack developer in Vienna."
+        path="/blog"
+      />
       <header className="blog-header">
         <h1 className="blog-header__title">~/blog</h1>
         <span className="blog-header__count">
