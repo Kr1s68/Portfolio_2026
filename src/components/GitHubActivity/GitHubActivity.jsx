@@ -289,6 +289,7 @@ export default function GitHubActivity({
  * @returns {Array<JSX.Element>}
  */
 function renderDetailLines(text, baseKey) {
+  if (!text) return [];
   const lines = text.split("\n");
   const elements = [];
   let key = baseKey;
